@@ -209,3 +209,26 @@ input:focus {
         transform: translateX(40%);
     }
 }
+
+.typing-box {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  min-height: 40px;
+  font-size: 2rem;
+  font-family: 'source-code-variable', monospace;
+  color: #fffbe7;
+  background: rgba(44, 68, 44, 0.7);
+  border-radius: 10px;
+  padding: 12px 24px;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: inline-block;
+}
+
+.typing-cursor {
+  display: inline-block;
+  color: #84c2e2;
+  font-weight: bold;
+  font-size: 2rem;
+  transition: opacity 0.2s;
+}
