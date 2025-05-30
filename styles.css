@@ -1,3 +1,4 @@
+/* --- Universal Reset and Body (Keep as is) --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,71 +6,127 @@
 }
 
 body {
-  font-family: "source-code-variable",sans-serif;
+  font-family: "source-code-variable", sans-serif;
   font-variation-settings: 'wght' 400;
   font-style: normal;
   font-weight: 200;
-  color: #c6d89a; /* This is the current text color from your provided CSS */
-  background: #1c351c; /* Background color of the entire page */
-  /* Remove background-size, background-attachment, background-repeat, background-position if you're using the mountains as the primary background visual */
+  color: #c6d89a;
+  background: #1c351c;
   line-height: 1.6;
   min-height: 100vh;
-  /* Remove position: absolute; from body unless absolutely necessary,
-     as it can affect overall layout. Keep it relative or static normally.
-     If you need it for specific positioning, keep it. */
-  /* For this setup, I'll assume body is not absolutely positioned unless specific reason.
-     If you intend the body to be positioned like that, it's fine,
-     but it might need `width: 100%;` and `height: 100%;` */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
 }
 
-.logo{
-  width: 150px;
-  height: 125px;
+/* --- Logo and Info --- */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center logo block on smaller screens */
+  margin-bottom: 10px;
 }
 
-.logoText{
-  font-size: 75px;
+.logo {
+  width: 100px; /* Smaller base size for mobile */
+  height: auto;
+  max-width: 100%;
+  margin-right: 8px; /* Space between logo image and text block */
+}
+
+.balls {
+  position: relative; /* Crucial for .quack and .hack */
+  /* Set height to accommodate two lines of text.
+     For 50px font, line-height 0.9: approx 2 * 50px * 0.9 = 90px.
+     Add a little buffer or adjust based on visual preference.
+  */
+  height: 85px;
+  width: 180px; /* Base width from previous adjustment, ensure it's enough */
+}
+
+.logoText {
+  font-size: 50px; /* Smaller base font size */
   font-family: liebling, sans-serif;
   font-style: normal;
   font-weight: 700;
-  padding-left: 10px;
+  line-height: 0.9;   /* ADJUSTED: For tighter packing of each word itself */
+  white-space: nowrap; /* Prevent text from wrapping */
+  position: absolute;   /* Make sure this is here for quack and hack */
+  left: 8px;          /* Default left offset within .balls */
 }
 
-.balls{
-  position: relative;
+.quack {
+  /* position: absolute; left: 8px; (Inherited from .logoText) */
+  top: 0; /* CHANGED: Position at the top of .balls */
+  /* bottom: 50%; REMOVED */
+  /* transform: translateY(55%); REMOVED */
 }
 
-.quack{
-  position: absolute;
-  left: 10px;
-  bottom: 35px;
+.hack {
+  /* position: absolute; left: 8px; (Inherited from .logoText) */
+  /* CHANGED: Position below .quack.
+     Calculation: .quack font-size (50px) * line-height (0.9) = 45px.
+     A `top` value slightly less than 45px will make them very tight or slightly overlap.
+     Start with a value like 40px and adjust.
+  */
+  top: 40px;
+  /* transform: translateY(-60%); REMOVED */
 }
 
-.hack{
-  position: absolute;
-  top: 30px;
-}
-
-.date{
-  color: #84c2e2;
-}
-.infoContainer{
-  position: relative;
-  left: 75px;
-  top: 50px;
-}
-.logoContainer{
+.infoContainer {
   display: flex;
-  padding: 5px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
 }
 
-.emailText{
+.date {
+  color: #84c2e2;
+  font-size: 1em;
+  margin-top: 5px;
+}
+
+/* --- Email Form and Icons (Keep your existing responsive styles) --- */
+/* ... (your existing CSS for email, mountains, etc. should follow here) ... */
+.emailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.emailContainer h2 {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.emailText {
   padding: 15px;
   border-radius: 15px;
-  width: 300px;
+  width: 100%;
   border: none;
   opacity: 0.90;
   background-color: #d3efe8;
+  margin-bottom: 10px;
+  font-size: 1em;
 }
 
 input:focus {
@@ -77,135 +134,213 @@ input:focus {
   border: none;
 }
 
-.submitButton{
+.submitButton {
   padding: 15px;
   border-radius: 15px;
   background-color: #84c2e2;
   color: white;
-  margin-left: 5px;
   cursor: pointer;
-    outline: none; /* Remove default focus outline if you have custom focus styles */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Initial raised shadow */
-    border: none;
-
-    /* Smooth transitions for all animated properties */
-    transition: transform 0.1s ease-out,
-                box-shadow 0.1s ease-out,
-                background-color 0.15s ease-out;
-  }
-
-  .submitButton:hover {
-    background-color: #538cc8; /* Darker blue on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Slightly larger shadow on hover */
-  }
-
-  .submitButton:active {
-    background-color: #538cc8; /* Even darker blue when clicked */
-    transform: translateY(2px) scale(0.98); /* Moves down and shrinks slightly */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* "Pressed in" shadow */
-    /* For a more "inset" feel, you could use: */
-    /* box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); */
-  }
-
-.emailContainer{
-  position: absolute;
-  top: 275px;
-  left: 875px;
-}
-.formContainer{
-  display: flex;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background-color 0.15s ease-out;
+  width: 100%;
+  font-size: 1em;
 }
 
-.iconContainer{
+.submitButton:hover {
+  background-color: #538cc8;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.submitButton:active {
+  background-color: #538cc8;
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.iconContainer {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
+
 .icons {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   transition: transform 0.2s ease;
-  margin: 5px;
+  margin: 0 8px;
 }
 
 .icons:hover {
   transform: scale(1.15);
 }
 
+#discord {
+  width: 28px;
+  height: 28px;
+}
 #linkedin{
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
 }
-#discord{
-  height: 35px;
-  width: 35px;
-}
+
 .mountain-container {
-    position: absolute; /* Position the entire mountain container */
-    bottom: 0; /* Place it at the bottom of the viewport/parent */
-    left: 0;
-    width: 100%; /* Take full width */
-    height: 300px; /* Adjust height as needed to control mountain size */
-    overflow: hidden; /* Hide any overflow if mountains go beyond this height */
-    z-index: -1; /* Send it to the background so content appears on top */
-    /* Adjust height and position as needed for your design */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  z-index: 0;
 }
 
 .mountain {
-    width: 0;
-    height: 0;
-    position: absolute;
-    bottom: 0; /* Align bases of mountains to the bottom of their container */
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .mountain-left {
-    border-left: 50vw solid transparent; /* Half viewport width for the base */
-    border-right: 50vw solid transparent; /* The other half of viewport width for the base */
-    border-bottom: 250px solid #276d37; /* The height and color of the mountain */
-    left: 0; /* Start from the left edge */
-    transform: translateX(-25%); /* Adjust horizontally to shift the peak, fine-tune as needed */
-    /* This makes the mountain wider than the viewport, and the translateX shifts it */
+  border-left: 100vw solid transparent;
+  border-right: 100vw solid transparent;
+  border-bottom: 150px solid #276d37;
+  left: 0;
+  transform: translateX(-40%);
 }
 
 .mountain-right {
+  border-left: 100vw solid transparent;
+  border-right: 100vw solid transparent;
+  border-bottom: 120px solid #276d37;
+  right: 0;
+  transform: translateX(40%);
+}
+
+
+/* --- MEDIA QUERIES --- */
+@media (min-width: 768px) {
+  body {
+    padding: 40px;
+  }
+
+  .logo {
+    width: 150px;
+    margin-right: 15px;
+  }
+
+  .logoText {
+    font-size: 75px;
+    left: 10px; /* Adjusted offset for larger screen */
+  }
+
+  .balls {
+    /* For 75px font, line-height 0.9: approx 2 * 75px * 0.9 = 135px. */
+    height: 125px; /* ADJUSTED: Height for 2 lines of 75px text */
+    width: 280px;  /* ADJUSTED: Width for larger font & offset. Was 260px. */
+  }
+
+  /* .quack top: 0 is inherited */
+
+  .hack {
+    /* Recalculate for 75px font & 0.9 line-height.
+       .quack's line box is ~67.5px high (75 * 0.9).
+       Start .hack just below that.
+    */
+    top: 60px; /* ADJUSTED value */
+  }
+
+  .infoContainer {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .logoContainer {
+    justify-content: flex-start;
+  }
+    /* ... (Keep other 768px+ styles for email, mountains etc.) ... */
+  .emailContainer {
+    align-items: flex-start;
+    text-align: left;
+    max-width: 500px;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .formContainer {
+    flex-direction: row;
+  }
+
+  .emailText {
+    margin-bottom: 0;
+    margin-right: 10px;
+    flex-grow: 1;
+  }
+
+  .submitButton {
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  .icons { width: 50px; height: 50px; }
+  #discord { width: 35px; height: 35px; }
+
+  .mountain-container { height: 250px; }
+  .mountain-left {
+    border-left: 70vw solid transparent;
+    border-right: 70vw solid transparent;
+    border-bottom: 200px solid #276d37;
+    transform: translateX(-30%);
+  }
+  .mountain-right {
+    border-left: 70vw solid transparent;
+    border-right: 70vw solid transparent;
+    border-bottom: 160px solid #276d37;
+    transform: translateX(30%);
+  }
+}
+
+@media (min-width: 992px) {
+  /* .infoContainer, .emailContainer (Keep centered option or row option as preferred) */
+  body {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .infoContainer {
+    flex: 1 1 40%;
+    margin: 0;
+    align-items: flex-start;
+    margin-top: 50px;
+    margin-left: clamp(20px, 5vw, 75px);
+  }
+
+  .emailContainer {
+    flex: 1 1 50%;
+    margin: 0;
+    align-items: flex-start;
+    margin-top: 200px; /* This may need adjustment depending on infoContainer height */
+    max-width: 450px;
+  }
+    /* ... (Keep other 992px+ styles for mountains etc.) ... */
+  .mountain-container { height: 300px; }
+  .mountain-left {
     border-left: 50vw solid transparent;
     border-right: 50vw solid transparent;
-    border-bottom: 200px solid #276d37; /* Slightly shorter mountain */
-    right: 0; /* Start from the right edge */
-    transform: translateX(25%); /* Adjust horizontally to shift the peak */
-}
-
-/* Optional: Adjust for smaller screens using media queries */
-@media (max-width: 768px) {
-    .mountain-left {
-        border-left: 70vw solid transparent;
-        border-right: 70vw solid transparent;
-        border-bottom: 200px solid #276d37;
-        transform: translateX(-30%);
-    }
-
-    .mountain-right {
-        border-left: 70vw solid transparent;
-        border-right: 70vw solid transparent;
-        border-bottom: 160px solid #276d37;
-        transform: translateX(30%);
-    }
-}
-
-@media (max-width: 480px) {
-    .mountain-container {
-        height: 200px; /* Make mountain container shorter on very small screens */
-    }
-    .mountain-left {
-        border-left: 100vw solid transparent;
-        border-right: 100vw solid transparent;
-        border-bottom: 150px solid #276d37;
-        transform: translateX(-40%);
-    }
-
-    .mountain-right {
-        border-left: 100vw solid transparent;
-        border-right: 100vw solid transparent;
-        border-bottom: 120px solid #276d37;
-        transform: translateX(40%);
-    }
+    border-bottom: 250px solid #276d37;
+    transform: translateX(-25%);
+  }
+  .mountain-right {
+    border-left: 50vw solid transparent;
+    border-right: 50vw solid transparent;
+    border-bottom: 200px solid #276d37;
+    transform: translateX(25%);
+  }
 }
