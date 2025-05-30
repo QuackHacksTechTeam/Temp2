@@ -178,7 +178,7 @@ input:focus {
   margin-top: 20px; /* Will be relative to its position in the flow */
   margin-bottom: 10px;
   min-height: 40px; /* Or use line-height and padding to control height */
-  font-size: 1.8rem; /* Base size, can be adjusted in media queries */
+  font-size: 1.25rem; /* Base size, can be adjusted in media queries */
   font-family: 'source-code-variable', monospace;
   color: #fffbe7;
   background: rgba(44, 68, 44, 0.7); /* Slightly transparent background */
