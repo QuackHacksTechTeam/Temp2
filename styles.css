@@ -17,7 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 20px; /* Initial padding for smaller screens */
   position: relative;
   overflow-x: hidden;
 }
@@ -38,42 +38,28 @@ body {
 }
 
 .balls {
-  position: relative; /* Crucial for .quack and .hack */
-  /* Set height to accommodate two lines of text.
-     For 50px font, line-height 0.9: approx 2 * 50px * 0.9 = 90px.
-     Add a little buffer or adjust based on visual preference.
-  */
+  position: relative;
   height: 85px;
-  width: 180px; /* Base width from previous adjustment, ensure it's enough */
+  width: 180px;
 }
 
 .logoText {
-  font-size: 50px; /* Smaller base font size */
+  font-size: 50px;
   font-family: liebling, sans-serif;
   font-style: normal;
   font-weight: 700;
-  line-height: 0.9;   /* ADJUSTED: For tighter packing of each word itself */
-  white-space: nowrap; /* Prevent text from wrapping */
-  position: absolute;   /* Make sure this is here for quack and hack */
-  left: 8px;          /* Default left offset within .balls */
+  line-height: 0.9;
+  white-space: nowrap;
+  position: absolute;
+  left: 8px;
 }
 
 .quack {
-  /* position: absolute; left: 8px; (Inherited from .logoText) */
-  top: 0; /* CHANGED: Position at the top of .balls */
-  /* bottom: 50%; REMOVED */
-  /* transform: translateY(55%); REMOVED */
+  top: 0;
 }
 
 .hack {
-  /* position: absolute; left: 8px; (Inherited from .logoText) */
-  /* CHANGED: Position below .quack.
-     Calculation: .quack font-size (50px) * line-height (0.9) = 45px.
-     A `top` value slightly less than 45px will make them very tight or slightly overlap.
-     Start with a value like 40px and adjust.
-  */
   top: 40px;
-  /* transform: translateY(-60%); REMOVED */
 }
 
 .infoContainer {
@@ -93,15 +79,14 @@ body {
   margin-top: 5px;
 }
 
-/* --- Email Form and Icons (Keep your existing responsive styles) --- */
-/* ... (your existing CSS for email, mountains, etc. should follow here) ... */
+/* --- Email Form and Icons --- */
 .emailContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 450px;
+  max-width: 450px; /* Max width for the form itself */
   margin-bottom: 30px;
   position: relative;
   z-index: 1;
@@ -144,7 +129,7 @@ input:focus {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border: none;
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background-color 0.15s ease-out;
-  width: 100%;
+  width: 100%; /* Full width when stacked */
   font-size: 1em;
 }
 
@@ -186,16 +171,52 @@ input:focus {
   width: 40px;
 }
 
+/* --- Typing Box (Newly Added) --- */
+.typing-box {
+  margin-top: 20px; /* Will be relative to its position in the flow */
+  margin-bottom: 10px;
+  min-height: 40px; /* Or use line-height and padding to control height */
+  font-size: 1.8rem; /* Base size, can be adjusted in media queries */
+  font-family: 'source-code-variable', monospace;
+  color: #fffbe7;
+  background: rgba(44, 68, 44, 0.7); /* Slightly transparent background */
+  border-radius: 10px;
+  padding: 12px 24px;
+  width: fit-content; /* Adapts to content */
+  max-width: 100%; /* Ensure it doesn't overflow its container */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  /* display: inline-block; /* Or block, depending on desired flow */
+  /* If you want it centered within its column: */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+
+.typing-cursor {
+  display: inline-block;
+  color: #84c2e2;
+  font-weight: bold;
+  font-size: inherit; /* Inherit size from .typing-box */
+  transition: opacity 0.2s;
+  animation: blink 1s step-end infinite; /* Blinking animation */
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+/* --- Mountains --- */
 .mountain-container {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 200px;
+  height: 200px; /* Base height for mobile */
   overflow: hidden;
-  z-index: 0;
+  z-index: 0; /* Behind other content */
 }
-
+/* ... (rest of your mountain styles are good) ... */
 .mountain {
   width: 0;
   height: 0;
@@ -221,9 +242,11 @@ input:focus {
 
 
 /* --- MEDIA QUERIES --- */
+
+/* Medium devices (tablets, landscape phones) */
 @media (min-width: 768px) {
   body {
-    padding: 40px;
+    padding: 40px; /* Increase padding */
   }
 
   .logo {
@@ -233,54 +256,45 @@ input:focus {
 
   .logoText {
     font-size: 75px;
-    left: 10px; /* Adjusted offset for larger screen */
+    left: 10px;
   }
 
   .balls {
-    /* For 75px font, line-height 0.9: approx 2 * 75px * 0.9 = 135px. */
-    height: 125px; /* ADJUSTED: Height for 2 lines of 75px text */
-    width: 280px;  /* ADJUSTED: Width for larger font & offset. Was 260px. */
+    height: 125px;
+    width: 280px;
   }
 
-  /* .quack top: 0 is inherited */
-
   .hack {
-    /* Recalculate for 75px font & 0.9 line-height.
-       .quack's line box is ~67.5px high (75 * 0.9).
-       Start .hack just below that.
-    */
-    top: 60px; /* ADJUSTED value */
+    top: 60px;
   }
 
   .infoContainer {
     align-items: flex-start;
     text-align: left;
-    margin-left: 5%;
-    margin-right: 5%;
+    /* margin-left: 5%; (Handled by body padding and potential max-width later) */
+    /* margin-right: 5%; */
   }
 
   .logoContainer {
     justify-content: flex-start;
   }
-    /* ... (Keep other 768px+ styles for email, mountains etc.) ... */
+
   .emailContainer {
     align-items: flex-start;
     text-align: left;
-    max-width: 500px;
-    margin-left: 5%;
-    margin-right: 5%;
+    max-width: 500px; /* Max width for the form itself */
+    /* margin-left: 5%; */
+    /* margin-right: 5%; */
   }
 
   .formContainer {
     flex-direction: row;
   }
-
   .emailText {
     margin-bottom: 0;
     margin-right: 10px;
     flex-grow: 1;
   }
-
   .submitButton {
     width: auto;
     flex-shrink: 0;
@@ -289,8 +303,14 @@ input:focus {
   .icons { width: 50px; height: 50px; }
   #discord { width: 35px; height: 35px; }
 
+  .typing-box {
+    font-size: 2rem; /* Can increase slightly */
+    /* If you want it centered within infoContainer (which is align-items: flex-start): */
+    /* align-self: center; */ /* Or margin-left/right auto if infoContainer items are centered */
+  }
+
   .mountain-container { height: 250px; }
-  .mountain-left {
+    .mountain-left {
     border-left: 70vw solid transparent;
     border-right: 70vw solid transparent;
     border-bottom: 200px solid #276d37;
@@ -304,34 +324,45 @@ input:focus {
   }
 }
 
+/* Large devices (desktops) */
 @media (min-width: 992px) {
-  /* .infoContainer, .emailContainer (Keep centered option or row option as preferred) */
   body {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between; /* This will push info and email apart */
     align-items: flex-start;
-    padding-left: 5%;
+    padding-left: 5%; /* Body padding creates side gutters */
     padding-right: 5%;
   }
 
   .infoContainer {
-    flex: 1 1 40%;
-    margin: 0;
-    align-items: flex-start;
+    flex: 1 1 40%; /* Takes up space, but might grow too wide */
+    margin: 0; /* Reset direct margins if body handles overall positioning */
+    align-items: flex-start; /* Content within aligns left */
     margin-top: 50px;
-    margin-left: clamp(20px, 5vw, 75px);
+    /* margin-left: clamp(20px, 5vw, 75px); /* This was specific to one side, body padding is now symmetrical */
+    max-width: 650px; /* ADDED: Max width for the info column */
   }
 
   .emailContainer {
-    flex: 1 1 50%;
+    flex: 1 1 45%; /* Adjusted basis slightly */
     margin: 0;
     align-items: flex-start;
-    margin-top: 200px; /* This may need adjustment depending on infoContainer height */
-    max-width: 450px;
+    margin-top: 200px; /* Adjust for vertical alignment with infoContainer */
+    max-width: 500px; /* Keeps its own max-width, already good */
   }
-    /* ... (Keep other 992px+ styles for mountains etc.) ... */
-  .mountain-container { height: 300px; }
-  .mountain-left {
+
+  .typing-box {
+    /* If .typing-box is within .infoContainer, it will align to flex-start.
+       If you need it centered under the info, you might need to adjust
+       .infoContainer's align-items or add margin auto to .typing-box.
+       For example, if .infoContainer has align-items: center, then this isn't needed.
+       If .infoContainer is align-items: flex-start:
+    */
+    /* margin-left: auto; */ /* If you want it centered in the infoContainer column */
+    /* margin-right: auto; */
+  }
+    .mountain-container { height: 300px; }
+    .mountain-left {
     border-left: 50vw solid transparent;
     border-right: 50vw solid transparent;
     border-bottom: 250px solid #276d37;
@@ -345,25 +376,51 @@ input:focus {
   }
 }
 
-.typing-box {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  min-height: 40px;
-  font-size: 2rem;
-  font-family: 'source-code-variable', monospace;
-  color: #fffbe7;
-  background: rgba(44, 68, 44, 0.7);
-  border-radius: 10px;
-  padding: 12px 24px;
-  width: fit-content;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  display: inline-block;
-}
+/* Extra Large screens (e.g., > 1400px or > 1600px) */
+@media (min-width: 1440px) {
+  body {
+    /* The padding from 992px breakpoint is inherited.
+       We can add a max-width to the whole body content area here.
+    */
+    max-width: 1360px; /* Example max-width for the content area */
+    margin-left: auto;   /* Center the body if it's narrower than viewport */
+    margin-right: auto;
+    /* Padding is still 5% of viewport, or override with fixed padding if max-width is active */
+    padding-left: 40px; /* Example fixed padding if body is maxed out */
+    padding-right: 40px;
+  }
 
-.typing-cursor {
-  display: inline-block;
-  color: #84c2e2;
-  font-weight: bold;
-  font-size: 2rem;
-  transition: opacity 0.2s;
+  .infoContainer {
+    /* flex-basis can be adjusted if needed, or it will scale within the new max-width body */
+    /* max-width: 700px; /* Optionally increase max-width for info column slightly */
+    margin-top: 60px; /* Slightly increase top margin */
+  }
+
+  .emailContainer {
+    /* max-width: 550px; /* Optionally increase max-width for email column slightly */
+    margin-top: 220px; /* Adjust vertical alignment */
+  }
+
+  .logoText {
+    font-size: 80px; /* Optional: slightly larger logo text */
+  }
+  .balls {
+    height: 135px; /* Adjust for new font size (80 * 0.9 * 2 lines) */
+    width: 300px;  /* Adjust for new font size */
+  }
+  .hack {
+    top: 65px; /* Adjust for 80px font (80 * 0.9 = 72px line box) */
+  }
+
+  .typing-box {
+    font-size: 2.2rem; /* Optional: slightly larger typing text */
+    padding: 15px 30px;
+  }
+
+  .date {
+    font-size: 1.1em;
+  }
+  .emailContainer h2 {
+    font-size: 1.6em;
+  }
 }
