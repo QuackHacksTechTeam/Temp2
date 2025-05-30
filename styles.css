@@ -10,7 +10,7 @@ body {
   font-variation-settings: 'wght' 400;
   font-style: normal;
   font-weight: 200;
-  color: #c6d89a;
+  color: #276d37;
   /*background: #1c351c;*/
   background: #d3efe8;
   line-height: 1.6;
@@ -105,15 +105,14 @@ body {
 }
 
 .emailText {
-  padding: 15px;
+  padding: 1rem;
   border-radius: 15px;
-  width: 100%;
+  width: 20rem;
   border: none;
   opacity: 0.90;
   background-color: white;
   margin-bottom: 10px;
   font-size: 1em;
-  
 }
 
 input:focus {
@@ -133,7 +132,7 @@ input:focus {
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background-color 0.15s ease-out;
   width: 100%; /* Full width when stacked */
   font-size: 1em;
-  margin-left: 1rem;
+  margin-left: 0.15rem;
 }
 
 .submitButton:hover {
@@ -318,7 +317,7 @@ input:focus {
   #discord { width: 35px; height: 35px; }
 
   .typing-box {
-    font-size: 2rem; /* Can increase slightly */
+    font-size: 1.25rem; /* Can increase slightly */
     /* If you want it centered within infoContainer (which is align-items: flex-start): */
     /* align-self: center; */ /* Or margin-left/right auto if infoContainer items are centered */
   }
