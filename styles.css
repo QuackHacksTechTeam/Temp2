@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "source-code-variable",sans-serif;
+  font-variation-settings: 'wght' 400;
+  font-style: normal;
+  font-weight: 200;
+  color: #276d37;
+  background: #1c351c;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #070707;
+  line-height: 1.6;
+  min-height: 100vh;  
+  position: absolute;
+}
+
+.logo{
+  width: 150px;
+  height: 125px;
+}
+
+.logoText{
+  font-size: 75px;
+  font-family: liebling, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  padding: 10px;
+}
+
+.logoContainer{
+  display: flex;
+}
